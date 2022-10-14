@@ -13,9 +13,11 @@ pub fn splish(a: i32, b: i32) -> i32 {
 
 // 1. Use the `cfg` attribute to mark the `test` module below as a test module
 
+#[cfg(test)]
 mod test {
     // 2. Bring all the library items into scope with a `use` statement
     // Hint: It's okay to use `*` here.
+    use super::*;
 
     // 3. Write a test function that verifies the following condition using the `assert_eq!` or
     // `assert_ne!` macros
@@ -25,6 +27,29 @@ mod test {
     //
     // `cargo test` should run your tests and pass
     // Hint: Don't forget the `#[test]` attribute for your test function!
+    #[test]
+    pub fn test_sploosh() {
+        let result = sploosh(1, 2, 3);
+        assert_eq!(result, 4);
+
+        let result = sploosh(5, 6, 7);
+        assert_ne!(result, 4);
+
+        let result = sploosh(-123, 1, 5);
+        assert_eq!(result, 99);
+    }
+
+    #[test]
+    pub fn test_splish() {
+        let result = splish(100, 10);
+        assert!(result.is_negative());
+
+        let result = splish(40,20);
+        assert!(result.is_positive());
+
+        let result = splish(9,3);
+        assert!(result == 0);
+    }
 
     // 4. Write a test function that verifies the following conditions using the `assert!` macro
     // - splish(100, 10) is negative
